@@ -3,7 +3,7 @@
 
 Escenas repetitivas, frustrantes, se suceden en una experiencia angustiosa.
 
-![Isla de ensueño](app/www/res/isla.jpg)
+![Isla de ensueño](app/www/res/island.jpg)
 
 [Jugar on-line](app/www/index.html)
 
