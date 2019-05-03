@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ifindex version="1.0" xmlns="http://babel.ifarchive.org/protocol/iFiction/">
+    <story>
+        <identification>
+            <ifid>1315CB61-C3CC-410A-8E67-82ECA617DF38</ifid>
+            <format>html</format>
+        </identification>
+        <bibliographic>
+            <title>Apnea</title>
+            <author>Baltasar</author>
+            <language>ES</language>
+            <headline>Un sueño interactivo</headline>
+            <genre>other</genre>
+            <forgiveness>polite</forgiveness>
+            <description>Un sueño... ¿o realidad?</description>
+        </bibliographic>
+        <contacts>
+            <authoremail>baltasarq@gmail.com</authoremail>
+            <url>http://caad.es/baltasarq/</url>
+        </contacts>
+        <release>
+            <version>1</version>
+            <releasedate>2019/01/22</releasedate>
+        </release>
+        <colophon>
+            <generator>Babble</generator>
+            <originated>2019/01/22</originated>
+        </colophon>
+    </story>
+</ifindex>
