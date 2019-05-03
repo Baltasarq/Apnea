@@ -3,6 +3,8 @@
 
 Escenas repetitivas, frustrantes, se suceden en una experiencia angustiosa.
 
-[Jugar on-line](https://baltasarq.github.io/Apnea/)
+![Isla de ensueño](res/isla.jpg)
+
+[Jugar on-line](index.html)
 
 *(c) 2019 Apnea Baltasar MIT License*
