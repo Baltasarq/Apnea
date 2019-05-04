@@ -6,8 +6,8 @@
  *  Scene 1: something repetitive happens: you left a room just
  *            to get to the same room again and again.
  *
- *  Scene 2: a swimmer swims and goes through islands,
- *           suddenly in one of them it goes into a tunnel which
+ *  Scene 2: a swimmer swims and walks through islands,
+ *           suddenly in one of them it falls into a tunnel which
  *           becomes more and more narrow.
  *            
  *  Scene 3: you wake up gasping for air,
@@ -506,9 +506,9 @@ objPhoto.preExamine = function() {
     let toret = this.desc;
     
     if ( this.getTimesExamined() > 1 ) {
-        toret = "Vuelves sobre tus pasos para volver a mirar \
-                 la foto. Aunque no reconoces poco más en ella \
-                 aparte de ti mismo, contemplarla te trae un vívido \
+        toret = "Vuelvo sobre mis pasos para volver a mirar \
+                 la foto. Aunque no reconozco poco más en ella \
+                 aparte de mi mismo, contemplarla me trae un vívido \
                  dolor a las piernas.";
     }
     
@@ -637,7 +637,7 @@ objTunnel1Stones.preExamine = function() {
     let toret = this.desc;
     
     if ( this.getTimesExamined() == 1 ) {
-        toret += " Te has tropezado al mirar hacia abajo, \
+        toret += " Me he tropezado al mirar hacia abajo, \
                   dejando al descubierto un pequeño \
                   ${palo, ex palo}.";
         objStick.moveTo( this.owner );
@@ -682,7 +682,7 @@ const locTunnel2 = ctrl.places.creaLoc(
      Primero me encorvo, después me agacho, mientras me araño \
      al avanzar con algunas de las piedras que forman sus paredes. \
      <br/>\
-     Te tranquiliza saber que podrías dar media vuelta, \
+     Me tranquiliza saber que podría dar media vuelta, \
      ${retroceder, s} en cualquier momento."
 );
 locTunnel2.pic = "res/tunnel2.jpg";
@@ -849,7 +849,7 @@ locChimney.ascend = function(msg) {
                  Ya no tengo más remedio que contener la respiración. \
                  Sostengo la tensión, viendo la luz colarse por \
                  el líquido elemento, reflejado en las burbujas \
-                 de aire que permito salir por mi boca. \
+                 de aire que permito escapan por mi boca. \
                  Pero no aguanto más... necesito respirar. \
                  Respirar. ${RESPIRAR, ex respiracion}...</p>";
     } else {
@@ -893,19 +893,41 @@ const objExitChimney = ctrl.creaObj(
      Ent.Scenery
 );
 
-objExitChimney.msgList = new MsgList([
+objExitChimney.msgList = [
     objExitChimney.desc,
     "La ${abertura, ex salida} se sitúa aún muy arriba.",
+    "La ${arriba, ex salida} arroja una luz aún tenue.",
+    "Como si fuera una chimenea, solo se puede salir por ${arriba, ex salida}.",
     "El ${techo, ex salida} del pozo se ve a varios metros, \
-        así como pequeñas aberturas en su derredor \
+        así como pequeñas aberturas en derredor \
         por las que se cuelan alfilerazgos de luz.",
+    "Aún distante, la ${apertura, ex salida} se acerca poco a poco.",
+    "A medida que la ${salida, ex salida} se aproxima, \
+        la ${chimenea, ex paredes} se va estrechando.",
+    "La salida se sitúa por encima de mi, más cercana.",
+    "El ${techo, ex salida} del pozo se ve a unos metros.",
+    "La salida se sitúa bastante por encima.",
+    "Me preocupa ver cómo las ${paredes, ex paredes}, \
+        se estrechan a medida que asciendo impulsado por el \
+        ${agua, ex agua}, mientras la ${salida, ex salida} \
+        se acerca cada vez más.",
     "Examinando la ${salida, ex salida}  sobre mi cabeza \
         con más detalle, sé que... ¡no cabré!  \
-        La abertura es demasiado pequeña."
-]);
+        La abertura es demasiado pequeña.",
+    "La estrechez de la ${salida, ex salida} empieza a preocuparme \
+        por la cantidad de ${agua, ex agua} a mi alrededor, así \
+        como la estrechez de las ${paredes, ex paredes}, \
+        que aumenta por momentos. Saco la cabeza por la abertura, \
+        aunque mis hombros tropiezan irremediablemente.",
+    "Definitivamente, la ${salida, ex salida} es demasiado pequeña, \
+        no permitiendo pasar mis hombros, aunque sí sacar la cabeza.",
+    "El ${agua, ex agua} sube inexorable, cubriendo mis hombros y \
+        empezando a subir por la ${abertura, ex salida}, cubriendo \
+        mi cabeza en un momento."
+];
 
 objExitChimney.preExamine = function() {
-    const toret = this.msgList.nextMsg();
+    const toret = this.msgList[ locChimney.ascentLevel ];
     
     return locChimney.ascend( toret );
 };
@@ -919,20 +941,53 @@ const objWaterChimney = ctrl.creaObj(
      Ent.Scenery
 );
 
-objWaterChimney.msgList = new MsgList([
+objWaterChimney.msgList = [
     objWaterChimney.desc,
     "El nivel de ${agua, ex agua} ha subido dramáticamente. \
         Floto ya en ella, moviendo los brazos para \
-        mantenerme por encima.",
+        mantenerme por encima. Hacia ${arriba, ex salida}, \
+        veo una salida.",
     "La entrada del estrecho túnel \
         ya no se ve al mirar hacia abajo, donde se juntan \
-        las ${paredes, ex paredes}.",
-    "El agua me empuja hacia arriba. Las ${paredes, ex paredes} \
-        se estrechan cada vez más."
-]);
+        las ${paredes, ex paredes}; al mirar hacia \
+        ${arriba, ex salida} veo luz.",
+    "El ${agua, ex agua} me empuja hacia arriba. \
+        Las ${paredes, ex paredes} se estrechan cada vez más. \
+        El pequeño túnel por el que entré \
+        se ha perdido ya definitivamente, mientas por encima \
+        veo una ${abertura, ex salida}.",
+    "Subiendo sin parar, el ${agua, ex agua} me rodea, \
+        haciéndome girar y llevándome contra las \
+        ${paredes, ex paredes} de la chimenea.",
+    "Chapoteo, tratando de mantenerme en la superficie y de no \
+        golpearme con las ${paredes, ex paredes}.",
+    "Subiendo sin parar, trato de mantenerme como puedo con la cabeza \
+        fuera del agua, mientras mantengo la distancia con \
+        las ${paredes, ex paredes} mediante los brazos.",
+    "Cada vez más arriba, puedo ver ya mucho más cercana \
+        la ${salida, ex salida}, que arroja un cono de luz sobre \
+        mi cabeza.",
+    "Subiendo, subiendo, me araño contra las rocas que forman \
+        las ${paredes, ex paredes} de esta chimenea.",
+    "La ${abertura, ex salida} sobre mi se aproxima cada vez más, \
+        mientras las ${paredes, ex paredes} se van estrechando.",
+    "Me golpeo contra las ${rocas, ex paredes} mientras trato de \
+        mantenerme a flote.",
+    "Ahora extiendo los brazos, agarrándome al techo donde se sitúa \
+        la única ${salida, ex salida} de este lugar.",
+    "La ${abertura, ex salida} es demasiado pequeña para poder salir \
+        por ella. Puedo sacar la cabeza por ella, pero los hombros \
+        se mantienen debajo, atrapados por las ${rocas, ex paredes}.",
+    "La desesperación me invade mientras el agua va cubriendo \
+        mi cuello, manteniéndome apenas por encima del nivel \
+        agarrándome a las ${rocas, ex paredes}.",
+    "Puedo notar cómo el agua sigue subiendo, cubriendo mi cara \
+        hasta no poder más que observar la luz distorsionada por las \
+        movimientos del líquido."
+];
 
 objWaterChimney.preExamine = function() {
-    const toret = this.msgList.nextMsg();
+    const toret = this.msgList[ locChimney.ascentLevel ];
     
     return locChimney.ascend( toret );
 };
@@ -946,20 +1001,51 @@ const objWallsChimney = ctrl.creaObj(
      Ent.Scenery
 );
 
-objWallsChimney.msgList = new MsgList([
+objWallsChimney.msgList = [
     objWallsChimney.desc,
     "La roca que me encierra forma unas ${paredes, ex paredes} \
      imperfectas, pero suficientes para mantenerme atrapado, \
      casi sumergido de ${agua, ex agua}.",
+    "Me mantengo a flote sobre el ${agua, ex agua} entre las rocas.", 
+    "No puedo encontrar ningún indicio por debajo \
+        del ${agua, ex agua} acerca del túnel que \
+        me trajo hasta aquí. Aunque no he sido consciente, \
+        la cantidad del agua que ha fluído ya aquí dentro \
+        es considerable.",
+    
+    "Las rocas a mi alrededor contienen el ${agua, ex agua} \
+        que me impulsa hacia arriba cada vez con más violencia.",
     "Aunque me mantengo sin dificultad a flote, noto como \
      cada vez el ${hueco, ex paredes} se va haciendo más estrecho.",
+    "Me rasco contra las rocas a medida que asciendo, pataleando y \
+        braceando sobre el agua. La ${abertura, ex salida} sobre mi \
+        se va acercando cada vez más.",
+    "Continúo ascendiendo sobre la corriente de ${agua, ex agua}.",
+    
+    "La ${abertura, ex abertura}, aún lejana, deja sentir claramente \
+        el paso de la luz dentro de la chimenea.",
+    "No hay otra salida que la ${abertura, ex salida} sobre mi \
+        cabeza. Mientras intento no golpearme con la roca, fabrico \
+        la esperanza de que al subir con el ${agua, ex agua}, \
+        pueda alcanzarla.",
+    "Subo y subo sobre el ${agua, ex agua}, buscando continuamente la \
+        ${abertura, ex salida} que sé que se encuentra sobre mi.",
+     
+    "El techo y las paredes se estrechan sobre mi. Me mantengo a \
+        distancia con los brazos mientras compruebo \
+        desesperado que la abertura no permite pasar mi cuerpo.",
+    "¡La ${abertura, ex salida} es demasiado estrecha! Mis hombros \
+        se quedan atrás mientras saco la cabeza por el hueco, \
+        desesperadamente en busca de aire.",
     "Ahora apenas puedo separar los brazos del cuerpo. \
-     El ${agua, ex agua} empieza ahora a subir por mi cuello, \
-     alcanzando mi cara."
-]);
+        El ${agua, ex agua} empieza ahora a subir por mi cuello, \
+        alcanzando mi cara.",
+    "Contengo la respiración mientras el agua sobrepasa mi cara y \
+        la luz se distorsiona con las burbujas que escapan de mi."
+];
 
 objWallsChimney.preExamine = function() {
-    const toret = this.msgList.nextMsg();
+    const toret = this.msgList[ locChimney.ascentLevel ];
     
     return locChimney.ascend( toret );
 };
@@ -1018,7 +1104,7 @@ objBed.preExamine = function() {
     var dvCmds = ctrl.getHtmlPart( "dvCmds" );
     dvCmds.style.display = "none";
     
-    ctrl.endGame( "Y la vida sigue. Y tú debes seguir con ella.<br/>"
+    ctrl.endGame( "Pero la vida sigue. Y debo seguir con ella.<br/>"
                     + htmlRestartEnding,
                   "res/cpap.jpg" );
     return "";
@@ -1036,5 +1122,4 @@ const pnjPan = ctrl.personas.creaPersona( "Pan", [ "pan" ],
  
 // Boot ----------------------------------------------------------------
 ctrl.personas.changePlayer( pnjPan );
-//ctrl.lugares.setStart( locRoom );
-ctrl.lugares.setStart( locChimney );
+ctrl.lugares.setStart( locRoom );
