@@ -985,8 +985,11 @@ locChimney.ascend = function(msg) {
                  Ya no tengo más remedio que contener la respiración. \
                  Sostengo la tensión, viendo la luz colarse por \
                  el líquido elemento, reflejado en las burbujas \
-                 de aire que pujo por guardar pero escapan por mi boca. \
-                 Pero no aguanto más... necesito respirar. \
+                 de aire que escapan por mi boca. Ese aire que trato \
+                 de retener en mi interior, pero que puja por \
+                 abandonar mi cuerpo, hasta que \
+                 no puedo retenerlo más. \
+                 Pero ya apenas me queda aliento... necesito respirar. \
                  Respirar. ${RESPIRAR, ex respiracion}...</p>";
     } else {
         msg += "<p>El nivel del ${agua, ex agua} sigue subiendo.</p>";
@@ -1054,7 +1057,7 @@ const objExitChimney = ctrl.creaObj(
 );
 
 objExitChimney.msgList = [
-     objExitChimney.desc,
+    objExitChimney.desc,
     "La ${abertura, ex salida} se sitúa aún muy arriba.",
     "La ${arriba, ex salida} arroja una luz aún tenue.",
     "Como si fuera una chimenea, solo se puede salir por ${arriba, ex salida}.",
@@ -1286,4 +1289,3 @@ const pnjPan = ctrl.personas.creaPersona( "Pan", [ "pan" ],
 // Boot ----------------------------------------------------------------
 ctrl.personas.changePlayer( pnjPan );
 ctrl.lugares.setStart( locRoom );
-
