@@ -111,6 +111,37 @@ locRoom.preExit = function() {
     return ctrl.goto( locSea );
 }
 
+const objMirror = ctrl.creaObj(
+    "espejo", [],
+    "Se trata de un estrecho espejo de cuerpo entero, \
+     dañado por el moho y los años \
+     hasta el punto de casi no reflejar la luz. \
+     Te ves reflejado, pero borroso.",
+    ctrl.places.limbo,
+    Ent.Portable
+);
+
+objMirror.hanged = true;
+
+objMirror.preTake = function() {
+    let toret = "";
+    
+    if ( this.hanged ) {
+        toret = "Una súbita e impetuosa curiosidad me lanza \
+                 hacia el ${espejo, ex espejo}. \
+                 Lo descuelgo, y lo tumbo en el suelo \
+                 sin excesivo cuidado.";
+        this.owner.desc += "<p>El ${espejo, ex espejo} \
+                            que descolgaste está tumbado en el suelo.";
+        this.hanged = false;
+        this.setScenery();
+    } else {
+        toret = "Ya está descolgado, tumbado en el suelo.";
+    }
+    
+    return toret;
+};
+
 const objReloj = ctrl.creaObj(
     "reloj", [],
     "Un reloj digital con cronómetro para nadadores. ",
@@ -285,7 +316,7 @@ const objFrames = ctrl.creaObj(
 
 const objWardrobe = ctrl.creaObj(
     "armario", [],
-    "Viejo y desportillado, apoyado contra la pared. \
+    "Viejo y desportillado, situado contra la pared. \
      La decoración es sobria, aportando tan solo \
      unas cuantas ${florituras, ex florituras} \
      en la parte superior. \
@@ -295,16 +326,43 @@ const objWardrobe = ctrl.creaObj(
     Ent.Scenery
 );
 
+objWardrobe.preExamine = function() {
+    let toret = this.desc;
+    
+    if ( objMirror.owner == ctrl.places.limbo ) {
+        toret += " Al lado del armario \
+                   hay un ${espejo, coge espejo} de cuerpo entero. \
+                   Su pésimo estado, oscurecido por \
+                   el paso del tiempo, hizo que no te percataras \
+                   de su presencia hasta ahora.";
+        objMirror.moveTo( locRoom );
+        ctrl.places.doDesc();
+    }
+    
+    return toret;
+};
+
 objWardrobe.pushed = false
 
 objWardrobe.preOpen = function() {
-    return "Abro las puertas con cuidado, \
-    arremolinando gran cantidad de polvo en suspensión en el proceso. \
-    Pero está vacío, a excepción de alguna prenda olvidada. \
-    Al fijarme en las puertas que acabo de abrir, \
-    poso mi vista casualmente tras ellas. Las cierro con cuidado. \
-    Noto unas marcas en la pared, como si el armario hubiera sido \
-    ${empujado, empuja armario} a lo largo de la misma."
+    let toret = "Abro las puertas con cuidado, \
+                 arremolinando gran cantidad de polvo \
+                 en suspensión en el proceso. \
+                 Pero está vacío, a excepción de \
+                 alguna prenda sucia y olvidada.";
+    
+    if ( !objMirror.hanged ) {
+        toret += " Al fijarme en las puertas que acabo de abrir, \
+                   poso mi vista casualmente tras ellas, \
+                   en el lugar donde la falta de polvo marca \
+                   la anterior presencia del espejo. \
+                   Noto unas marcas en la pared, \
+                   como si el armario hubiera sido \
+                   ${empujado, empuja armario} \
+                   a lo largo de la misma.";
+    }
+    
+    return toret + " Cierro las puertas de nuevo, cuidadosamente.";
 }
 
 objWardrobe.prePush = function() {
@@ -313,11 +371,11 @@ objWardrobe.prePush = function() {
     if ( !this.pushed ) {
         this.pushed = true;
         ctrl.places.doDesc();
-        toret = "Has empujado el armario. Al principio parecía que \
+        toret = "He empujado el armario. Al principio parecía que \
             no iba a moverse, pero finalmente este cedió, \
             pudiendo moverlo un par de metros.";
     } else {
-        toret = "Ya lo empujaste.";
+        toret = "Ya lo empujé.";
     }
     
     return toret;
@@ -342,7 +400,7 @@ const objWardrobeFlowerDecorations = ctrl.creaObj(
 const objWardrobeWoodPanels = ctrl.creaObj(
     "paneles", [ "armazon", "madera", "panel" ],
     "El paso de los años ha afectado al armario. \
-     El armazón está inclinado hacia la derecha y \
+     El armazón está inclinado hacia la derecha \
      y hacia adelante, y las ${puertas, ex puertas} se ven \
      inclinadas hacia el centro por su propio peso.",
     locRoom,
@@ -378,9 +436,13 @@ locSea.preExamine = function() {
                  Al poco de acomodarme para avanzar, \
                  comencé a notar a continuación \
                  cómo era succionado dejando atrás aquellas paredes, \
-                 siendo arrastrado hacia adelante irresistiblemente. \
-                 <br/>Buscando en derredor... no existe ahora \
+                 siendo arrastrado hacia adelante irresistiblemente, \
+                 zambulléndome en el interior de una gran masa de agua...\
+                 </p><p>Buscando en derredor... no existe ahora \
                  rastro alguno del túnel que acabo de dejar.\
+                 </p><p>Con tres brazadas, salgo a la superficie, \
+                 haciendo una gran inspiración, liberando el aliento \
+                 que inconscientemente había estado reteniendo.\
                  </p><p>Nado. El agua fluye a mi alrededor, \
                  provocando canales de frío liquido acariciando \
                  mi cuerpo. Los musculos agradecen \
@@ -516,15 +578,25 @@ const locBeach = ctrl.places.creaLoc(
      mientras noto como el sol lame mi piel."
 );
 locBeach.pic = "res/sandy_beach.jpg";
+locBeach.numArrivals = 0;
 
 locBeach.preExamine = function() {
     let toret = this.desc;
     
     if ( this.getTimesExamined() == 0 ) {
-        toret = "<p>Comprobando que estaba ya muy cerca, \
+        let prefix = "<p>Comprobando que estaba ya muy cerca, \
                  He forzado un poco el ritmo \
                  para poder emerger en la playa de arena dorada \
-                 cuanto antes.</p><p>" + toret + "</p>";
+                 cuanto antes.</p>";
+
+        if ( this.numArrivals > 0 ) {
+            prefix += "<p>Un momento... ¡es la misma isla! \
+                    ¡He nadado de vuelta hasta la misma isla! \
+                    ¿Cómo es posible?</p>";
+        }
+        
+        this.numArrivals += 1;
+        toret = prefix + "<p>" + toret + "</p>"
     }
     
     return toret;
