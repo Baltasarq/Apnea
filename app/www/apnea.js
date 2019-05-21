@@ -242,7 +242,6 @@ objMesa.preExamine = function() {
       && ctrl.places.limbo.has( objReloj ) )
     {
         objReloj.moveTo( objMesa.owner );
-        ctrl.places.doDesc();
         toret += " Sobre ella, puedo ver un ${reloj, coge reloj}.";
     }
     
@@ -370,10 +369,10 @@ objWardrobe.prePush = function() {
     
     if ( !this.pushed ) {
         this.pushed = true;
-        ctrl.places.doDesc();
-        toret = "He empujado el armario. Al principio parecía que \
-            no iba a moverse, pero finalmente este cedió, \
-            pudiendo moverlo un par de metros.";
+        toret = "Al principio parecía que no iba a moverse, \
+            pero finalmente el armario cedió, \
+            pudiendo moverlo un par de metros. \
+            ¡La pared escondía un {túnel, sal} en el lugar que ocupaba!";
     } else {
         toret = "Ya lo empujé.";
     }
@@ -861,7 +860,6 @@ objTunnel1Stones.preExamine = function() {
                   dejando al descubierto un pequeño \
                   ${palo, ex palo}.";
         objStick.moveTo( this.owner );
-        ctrl.places.doDesc();
     }
     
     return toret;
