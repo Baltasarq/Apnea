@@ -25,7 +25,7 @@ ctrl.setVersion( "1.0 20190509" );
 // -------------------------------------------------------------- Room
 const locRoom = ctrl.places.creaLoc(
     "Habitación", ["habitacion", "sala", "prision", "estancia"],
-    "<p>Un ${televisor, ex tv} muy viejo, \
+    "Un ${televisor, ex tv} muy viejo, \
     un ${gran sillón, ex sillon}, \
     ${una mesa decrépita, ex mesa}, \
     y una gran ${ventana, ex ventana} \
@@ -35,7 +35,7 @@ const locRoom = ctrl.places.creaLoc(
     La luz crea varios ${haces de polvo en suspensión, ex polvo} que, \
     de forma hipnótica, puedo atravesar con las manos para observar \
     cómo vuelven a formarse de nuevo.</p> \
-    <p>Puedo ver ${un dintel, ex dintel} que invita a ${salir, n} de aquí.</p>"
+    <p>Puedo ver ${un dintel, ex dintel} que invita a ${salir, n} de aquí."
 );
 locRoom.pic = "res/room.jpg";
 locRoom.setExit( "norte", locRoom );
@@ -71,7 +71,7 @@ locRoom.preExamine = function() {
         me hace sentir en casa y en un lugar extraño. \
         Camino en derredor de la mesa, \
         mediante la poca luz disponible. ¿Qué es este lugar?"
-        + "<br/>" + toret;
+        + "</p><p>" + toret + "</p>";
     }
     
     if ( objWardrobe.pushed ) {
@@ -79,13 +79,13 @@ locRoom.preExamine = function() {
                     el armario que desplacé, \
                     puedo ver un agujero \
                     en la pared, parece el comienzo de un \
-                    ${túnel, sal}.</p>";
+                    ${túnel, sal}.";
     } else {
         if ( locRoom.getTimesExamined() < 2 ) {
-            ctrl.print("No sé cuál es el propósito \
+            toret += "<p>No sé cuál es el propósito \
                         de esta estancia, \
                         si bien sé... o siento, mejor dicho, \
-                        que debo escapar de este lugar.");
+                        que debo escapar de este lugar.";
         }
     }
     
@@ -127,11 +127,11 @@ objMirror.preTake = function() {
     let toret = "";
     
     if ( this.hanged ) {
-        toret = "Una súbita e impetuosa curiosidad me lanza \
-                 hacia el ${espejo, ex espejo}. \
-                 Lo descuelgo, y lo tumbo en el suelo \
+        toret = "Una súbita e impetuosa curiosidad me lanzó \
+                 hacia el ${espejo, ex espejo}, \
+                 descolgándolo y tumbándolo en el suelo \
                  sin excesivo cuidado.";
-        this.owner.desc += "<p>El ${espejo, ex espejo} \
+        this.owner.desc += "</p><p>El ${espejo, ex espejo} \
                             que descolgaste está tumbado en el suelo.";
         this.hanged = false;
         this.setScenery();
@@ -142,14 +142,14 @@ objMirror.preTake = function() {
     return toret;
 };
 
-const objReloj = ctrl.creaObj(
+const objWatch = ctrl.creaObj(
     "reloj", [],
     "Un reloj digital con cronómetro para nadadores. ",
     ctrl.places.limbo,
     Ent.Portable
 );
 
-objReloj.preExamine = function() {
+objWatch.preExamine = function() {
     let toret = this.desc;
     
     h = Math.floor( Math.random() * 24 );
@@ -239,16 +239,16 @@ objMesa.preExamine = function() {
     let toret = this.desc;
     
     if ( this.getTimesExamined() <= 1
-      && ctrl.places.limbo.has( objReloj ) )
+      && ctrl.places.limbo.has( objWatch ) )
     {
-        objReloj.moveTo( objMesa.owner );
+        objWatch.moveTo( objMesa.owner );
         toret += " Sobre ella, puedo ver un ${reloj, coge reloj}.";
     }
     
     return toret;
 };
 
-const objPolvo = ctrl.creaObj(
+const objDust = ctrl.creaObj(
     "polvo", [ "haz", "haces" ],
     "Los haces de luz muestran remolinos de polvo que se hacen \
      y deshacen a medida que agitas tu mano, volviendo a ser \
@@ -372,7 +372,7 @@ objWardrobe.prePush = function() {
         toret = "Al principio parecía que no iba a moverse, \
             pero finalmente el armario cedió, \
             pudiendo moverlo un par de metros. \
-            ¡La pared escondía un {túnel, sal} en el lugar que ocupaba!";
+            ¡La pared escondía un ${túnel, sal} en el lugar que ocupaba!";
     } else {
         toret = "Ya lo empujé.";
     }
