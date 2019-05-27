@@ -756,7 +756,7 @@ const objBottle = ctrl.creaObj(
     "botella", [ "cuello", "barco", "proa" ],
     "Se trata de una botella de cristal blanco, grueso y \
      transparente. Siento el fuerte impulso de \
-     ${tirar, tira de botella} de él para desenterrarlo.",
+     ${tirar, tira de botella} de él para desenterrarla.",
     locDune,
     Ent.Scenery
 );
@@ -867,7 +867,7 @@ objTunnel1Stones.preExamine = function() {
 
 const objStick = ctrl.creaObj(
     "palo", [],
-    "Una pequeño trozo de madera.",
+    "Un pequeño trozo de madera.",
     ctrl.places.limbo,
     Ent.Portable
 );
