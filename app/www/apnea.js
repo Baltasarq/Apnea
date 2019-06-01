@@ -180,7 +180,7 @@ const objArmchair = ctrl.creaObj(
 
 objArmchair.preEnter = function() {
     return "Al sentarme, una gran seta de polvo surge de debajo \
-            de mi para expandirse por el ${techo, ex techo}, \
+            de mí para expandirse por el ${techo, ex techo}, \
             como una gran explosión. Siento ahogo por la gran cantidad de polvo \
             en el ambiente. Pronto, al menos, parece despejarse.";
 };
@@ -453,7 +453,7 @@ locSea.preExamine = function() {
                  entre celeste cristalino en la superficie, \
                  y malva en las profundidades. \
                  Y mientras tanto, yo nado. \
-                 Rítmicamente, deslizandome por la superficie, \
+                 Rítmicamente, deslizándome por la superficie, \
                  expulsando el aire de mis pulmones, \
                  tomando de nuevo aire al girar la cabeza \
                  tras el recobro, remando con mis brazos, \
@@ -480,12 +480,23 @@ locSea.preSwim = function() {
 const objIsland = ctrl.creaObj(
     "isla", ["islote"],
     "Un pequeño islote en la distancia. \
-     Se aprecian rocas y una playa arenosa en el medio. \
-     Redoblo mis esfuerzos, pero, \
-     por alguna razón, no soy capaz de llegar allí.",
+     Se aprecian rocas y una playa arenosa en el medio. ",
     locSea,
     Ent.Scenery
 );
+
+objIsland.preExamine = function() {
+    let toret = this.desc;
+    
+    if ( locSea.arriving ) {
+        toret += "La playa está muy cerca, podría ${alcanzarla, nada}.";
+    } else {
+        toret += "Redoblo mis esfuerzos, pero, \
+                  por alguna razón, no soy capaz de llegar allí.";
+    }
+    
+    return toret;
+};
 
 const objSea = ctrl.creaObj(
     "agua", [],
@@ -550,7 +561,7 @@ const objSky = ctrl.creaObj(
 const objSun = ctrl.creaObj(
     "sol", [],
     "Giro sobre mi mismo para nadar a espalda y poder, de esta forma, \
-     observar al astro rey. La luz es cegadora, aún a través de \
+     observar al astro rey. La luz es cegadora, aun a través de \
      de las gafas de natacion oscuras. De hecho, debo cerrar los ojos \
      a la vez que siento la imperiosa necesidad de abrirlos. \
      De repente, recuerdo que nado a espalda y giro de nuevo, \
@@ -637,7 +648,7 @@ objSandOfDune.preExamine = function() {
     
     if ( this.getTimesExamined() < 2 ) {
         toret = "La brisa moldea los ligeros valles y montañas \
-                 del tapizado por debajo de mi. \
+                 del tapizado por debajo de mí. \
                  Una fina granizada de suave arena ruge a ras de suelo. \
                  Siento un ligero cosquilleo al notarla \
                  golpear contra mis pies. "
@@ -792,7 +803,9 @@ const objNextIsland = ctrl.creaObj(
 
 const objSeaFromDune = ctrl.creaObj(
     "mar", [ "agua" ],
-    "El agua me rodea en todas direcciones. ",
+    "El agua me rodea en todas direcciones. \
+     Puedo ${volver a la playa, s} de la que emergí, \
+     o ${descender hacia la playa frente a mi, n}.",
     locDune,
     Ent.Scenery
 );
@@ -800,7 +813,7 @@ const objSeaFromDune = ctrl.creaObj(
 const objBeach2 = ctrl.creaObj(
     "playa", [],
     "Desde la cima de la colina puedo ver la playa del otro lado, \
-     que me permite volver al ${mar, ex mar} a nadar \
+     que me permite avanzar al ${mar, ex mar} a ${nadar, n} \
      hasta la siguiente ${isla, ex isla}. \
      La ${duna, mirar} a mi alrededor parece ser la cima del mundo. ",
     locDune,
@@ -877,7 +890,7 @@ locTunnel1.preExamine = function() {
     
     if ( this.getTimesExamined() < 1 ) {
         toret = "<p>Una gran grieta se ocultaba bajo \
-                 aquella depresión, que ha resultado ser \
+                 aquella depresión, que resultó ser \
                  un tapón de arena cediendo bajo mis pies. \
                  Aquel agujero daba paso a una cueva, \
                  que se estrechaba rapidamente.</p>"
@@ -962,7 +975,7 @@ objFluorescent.preTake = function() {
 // ----------------------------------------------------- Tunnel's end
 const locTunnelEnd = ctrl.places.creaLoc(
     "Fin del túnel", ["tunel", "cueva", "fondo" ],
-    "Este es el final, y mucho más oscuro. \
+    "Este es el final, y es mucho más oscuro. \
      Incluso contando desde que \
      ${comencé a agacharme, s} me encuentro \
      en la parte más estrecha con diferencia. \
