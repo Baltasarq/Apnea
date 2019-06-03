@@ -42,15 +42,15 @@ locRoom.setExit( "norte", locRoom );
 locRoom.dejaVuMsgs = new MsgList( [
     "¿Pero... qué ha pasado? ¡Si estoy en el mismo lugar!",
     "Y de nuevo... en el mismo sitio.",
-    "La frustración crece en mi. ¿No hay salida?",
+    "La frustración crece en mí. ¿No hay salida?",
     "Intento encontrar una explicación para todo esto, pero...",
     "Y de nuevo, lo mismo...",
     "No puede ser, no puede ser... otra vez igual.",
     "De nuevo lo mismo. ¿Es esto un <i>déja vú</i>?",
     "Empiezo a notar un sudor frío al temer que esto no tendrá fin...",
-    "Otra vez... otra vez... miro tras de mi, seguro de encontrar \
+    "Otra vez... otra vez... miro tras de mí, seguro de encontrar \
      el dintel que acabo de atravesar, pero... no hay nada... \
-     la única salida, igual que antes, está delante de mi.",
+     la única salida, igual que antes, está delante de mí.",
     "Sé que acabo de atraversar el dintel, \
      aunque no puedo distinguir nada al intentar mirar \
      a través de ella. Estoy atrapado.",
@@ -560,7 +560,7 @@ const objSky = ctrl.creaObj(
 
 const objSun = ctrl.creaObj(
     "sol", [],
-    "Giro sobre mi mismo para nadar a espalda y poder, de esta forma, \
+    "Giro sobre mí mismo para nadar a espalda y poder, de esta forma, \
      observar al astro rey. La luz es cegadora, aun a través de \
      de las gafas de natacion oscuras. De hecho, debo cerrar los ojos \
      a la vez que siento la imperiosa necesidad de abrirlos. \
@@ -738,7 +738,7 @@ objPhoto.preExamine = function() {
     if ( this.getTimesExamined() > 1 ) {
         toret = "Vuelvo sobre mis pasos para volver a mirar \
                  la foto. Aunque no reconozco poco más en ella \
-                 aparte de mi mismo, contemplarla me trae un vívido \
+                 aparte de mí mismo, contemplarla me trae un vívido \
                  dolor a las piernas.";
     }
     
@@ -805,7 +805,7 @@ const objSeaFromDune = ctrl.creaObj(
     "mar", [ "agua" ],
     "El agua me rodea en todas direcciones. \
      Puedo ${volver a la playa, s} de la que emergí, \
-     o ${descender hacia la playa frente a mi, n}.",
+     o ${descender hacia la playa frente a mí, n}.",
     locDune,
     Ent.Scenery
 );
@@ -1142,22 +1142,22 @@ const objExitChimney = ctrl.creaObj(
 objExitChimney.msgList = [
     objExitChimney.desc,
     "La ${abertura, ex salida} se sitúa aún muy arriba.",
-    "La ${arriba, ex salida} arroja una luz aún tenue.",
+    "La ${salida más arriba, ex salida}, arroja una luz aún tenue.",
     "Como si fuera una chimenea, solo se puede salir por ${arriba, ex salida}.",
     "El ${techo, ex salida} del pozo se ve a varios metros, \
         así como pequeñas aberturas en derredor \
-        por las que se cuelan alfilerazgos de luz.",
+        por las que se cuelan pequeños puntos de luz.",
     "Aún distante, la ${apertura, ex salida} se acerca poco a poco.",
     "A medida que la ${salida, ex salida} se aproxima, \
         la ${chimenea, ex paredes} se va estrechando.",
-    "La salida se sitúa por encima de mi, más cercana.",
+    "La salida se sitúa por encima de mí, más cercana.",
     "El ${techo, ex salida} del pozo se ve a unos metros.",
     "La salida se sitúa bastante por encima.",
     "Me preocupa ver cómo las ${paredes, ex paredes}, \
         se estrechan a medida que asciendo impulsado por el \
         ${agua, ex agua}, mientras la ${salida, ex salida} \
         se acerca cada vez más.",
-    "Examinando la ${salida, ex salida}  sobre mi cabeza \
+    "Examinando la ${salida, ex salida} sobre mi cabeza \
         con más detalle, sé que... ¡no cabré!  \
         La abertura es demasiado pequeña.",
     "La estrechez de la ${salida, ex salida} empieza a preocuparme \
@@ -1215,7 +1215,7 @@ objWaterChimney.msgList = [
         mi cabeza.",
     "Subiendo, subiendo, me araño contra las rocas que forman \
         las ${paredes, ex paredes} de esta chimenea.",
-    "La ${abertura, ex salida} sobre mi se aproxima cada vez más, \
+    "La ${abertura, ex salida} sobre mí se aproxima cada vez más, \
         mientras las ${paredes, ex paredes} se van estrechando.",
     "Me golpeo contra las ${rocas, ex paredes} mientras trato de \
         mantenerme a flote.",
@@ -1264,7 +1264,7 @@ objWallsChimney.msgList = [
     "Aunque me mantengo sin dificultad a flote, noto como \
      cada vez el ${hueco, ex paredes} se va haciendo más estrecho.",
     "Me rasco contra las rocas a medida que asciendo, pataleando y \
-        braceando sobre el agua. La ${abertura, ex salida} sobre mi \
+        braceando sobre el agua. La ${abertura, ex salida} sobre mí \
         se va acercando cada vez más.",
     "Continúo ascendiendo sobre la corriente de ${agua, ex agua}.",
     
@@ -1275,8 +1275,8 @@ objWallsChimney.msgList = [
         la esperanza de que al subir con el ${agua, ex agua}, \
         pueda alcanzarla.",
     "Subo y subo sobre el ${agua, ex agua}, buscando continuamente la \
-        ${abertura, ex salida} que sé que se encuentra sobre mi.",
-    "El techo y las ${paredes, ex paredes} se estrechan sobre mi. \
+        ${abertura, ex salida} que sé que se encuentra sobre mí.",
+    "El techo y las ${paredes, ex paredes} se estrechan sobre mí. \
         Me mantengo a \
         distancia con los brazos mientras compruebo \
         desesperado que la ${abertura, ex salida} \
@@ -1288,7 +1288,7 @@ objWallsChimney.msgList = [
         El ${agua, ex agua} empieza ahora a subir por mi cuello, \
         alcanzando mi cara.",
     "Contengo la respiración mientras el agua sobrepasa mi cara y \
-        la luz se distorsiona con las burbujas que escapan de mi."
+        la luz se distorsiona con las burbujas que escapan de mí."
 ];
 
 objWallsChimney.preExamine = function() {
@@ -1318,7 +1318,7 @@ function amusing() {
             las vías respiratorias sin poder respirar adecuadamente, \
             produciéndose una pobre oxigenación de la sangre. \
             Aunque la mayor parte de las veces se prescribe una dieta \
-            para adelagazar, existen muchos casos \
+            para adelgazar, existen muchos casos \
             de pacientes que la padecen \
             sin presentar sobrepeso u obesidad. \
             No existe curación para la apnea del sueño, \
