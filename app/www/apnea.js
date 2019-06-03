@@ -765,7 +765,7 @@ objRecipient.preExamine = function() {
 
 const objBottle = ctrl.creaObj(
     "botella", [ "cuello", "barco", "proa" ],
-    "Se trata de una botella de cristal blanco, grueso y \
+    "Se trata del cuello de una botella de cristal blanco, grueso y \
      transparente. Siento el fuerte impulso de \
      ${tirar, tira de botella} de él para desenterrarla.",
     locDune,
