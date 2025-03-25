@@ -3,7 +3,7 @@
 
 Escenas repetitivas, frustrantes, se suceden en una experiencia angustiosa.
 
-![Isla](Apnea/res/island.jpg)
+![Isla](app/res/island.jpg)
 
 [Jugar on-line](https://baltasarq.github.io/app/index.html)
 
